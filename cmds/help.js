@@ -10,13 +10,13 @@ const menus = {
     prune <options>
 
     --translations, -t ..... the translation file to use
-    --identifier, -i ....... an identifier to use in the output file name
-    --directory, -d ........ the directory to match translation keys`,
+    --directory, -d ........ the directory to match translation keys
+    --output, -o ........... the file to output pruned translations`,
   keys: `
     keys <options>
 
     --translations, -t ..... the translation file to use
-    --identifier -i ........ an identifier to use in the output file name`,
+    --output -o ............ the file to output keys`,
 }
 
 module.exports = (args) => {

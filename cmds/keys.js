@@ -1,5 +1,4 @@
 const fs = require('fs').promises;
-const path = require('path');
 const { getTranslationKeys } = require('../utils/translations');
 const error = require('../utils/error')
 
@@ -10,20 +9,22 @@ module.exports = async (args) => {
     error('Translation file must be specified (-t option).', true);
   }
 
-  const identifier = args.identifier || args.i;
+  const output = args.output || args.o;
 
   try {
     const data = await fs.readFile(fileName, { encoding: 'utf-8' });
     const translationObj = JSON.parse(data);
     const translationKeys = getTranslationKeys(translationObj, null, []);
 
-    try {
-      const output = `output/${identifier ? `${identifier}-` : ''}${path.basename(fileName).split('.').slice(0, -1)}-keys.txt`;
-      await fs.writeFile(output, translationKeys.join('\n'));
-
-      console.log(`Translation keys outputted to ${output}`);
-    } catch(err) {
-      error(`Unable to write file ${output}: ${err}`, true);
+    if (output) {
+      try {
+        await fs.writeFile(output, translationKeys.join('\n'));
+        console.log(`Translation keys outputted to ${output}`);
+      } catch {
+        error(`Unable to write file ${output}: ${err}`, true);
+      }
+    } else {
+      console.log(translationKeys.join('\n'));
     }
   } catch(err) {
     error(`Unable to read file ${fileName}: ${err}`, true)

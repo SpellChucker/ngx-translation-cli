@@ -25,7 +25,7 @@ function ignoreFunc(file, stats) {
 module.exports = async (args) => {
   const fileName = args.translations || args.t;
   const directory = args.directory || args.d;
-  const identifier = args.identifier || args.i;
+  const output = args.output || args.o;
 
   if (!fileName || !directory) {
     error('Both translation file (-t option) and directory (-d option) are required', true);
@@ -58,15 +58,18 @@ module.exports = async (args) => {
 
       const content = JSON.stringify(unzombified, null, 2);
       const finalTranslationKeys = getTranslationKeys(unzombified, null, []);
-      const output = `output/${identifier ? `${identifier}-` : '' }${path.basename(fileName)}`;
 
-      try {
-        await fs.writeFile(output, content);
+      if (output) {
+        try {
+          await fs.writeFile(output, content);
 
-        console.log(`Cleaned translations output to ${output}`);
-        console.log(`Removed ${translationKeys.length - finalTranslationKeys.length} keys. ${finalTranslationKeys.length} keys remain.`);
-      } catch(err) {
-        error(`Unable to write file ${output}: ${err}`, true);
+          console.log(`Cleaned translations output to ${output}`);
+          console.log(`Removed ${translationKeys.length - finalTranslationKeys.length} keys. ${finalTranslationKeys.length} keys remain.`);
+        } catch(err) {
+          error(`Unable to write file ${output}: ${err}`, true);
+        }
+      } else {
+        console.log(content);
       }
     } catch(err) {
       error(`Unable to recurse directory ${directory}: ${err}`, true);
