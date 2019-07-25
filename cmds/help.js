@@ -1,8 +1,9 @@
 const menus = {
   main: `
-    prune [command] <options>
+    ngx-translation-cli [command] <options>
 
-    prune .............. prune translation file
+    prune .............. output pruned translation file
+    keys ............... output all translation keys for a translation file
     version ............ show package version
     help ............... show help menu for a command`,
 
