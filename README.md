@@ -6,6 +6,15 @@ A CLI application to manage translations in Angular projects.
 $ ngx-translation-cli <command> <options>
 ```
 
+## Installation
+
+This package is meant to be installed globally. Install it using the following command:
+
+```bash
+$ npm i -g ngx-translation-cli
+```
+
+
 ## Commands
 
 ### keys

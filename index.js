@@ -3,7 +3,7 @@ const error = require('./utils/error')
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2));
-  const cmd = args._[0] || 'help';
+  let cmd = args._[0] || 'help';
 
   if (args.version || args.v) {
     cmd = 'version';
