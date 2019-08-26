@@ -1,3 +1,11 @@
+**NOTE:** This will not work for dynamic translations as of now. For example:
+
+```typescript
+...
+{{ 'dynamic.translation.' + someVar | translate }}
+...
+```
+
 ## Angular Translation CLI
 
 A CLI application to manage translations in Angular projects.
